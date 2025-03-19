@@ -44,7 +44,7 @@ projet/
 
 ## Prérequis
 Voir **requirements.txt**. \
-Concernant les ressources, le dossier est à télécharger depuis *https://gofile.io/d/oxJ6hP* et à glisser dans le projet comme l'indique l'architecture.
+Concernant les ressources, le dossier est à télécharger depuis *[ce drive](https://drive.google.com/drive/folders/1dIx56IIORXPxI0vRue6CocAA-3QYxF0U?usp=sharing)* et à glisser dans le projet comme l'indique l'architecture.
 ## Tests Unitaires
 Les tests unitaires se lancent via la commande (par exemple avec similarity_search_test.py) et depuis la racine du projet :
 ```
