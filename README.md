@@ -1,4 +1,4 @@
-Recherche d'image par similarité et indexation d'une base d'image
+# Recherche d'image par similarité et indexation d'une base d'image
 Ce projet implémente un système de recherche d'images similaires basé sur l'extraction de caractéristiques et l'indexation efficace avec FAISS. Il est conçu pour des applications telles que la recherche d'images, la recommandation de contenu et l'analyse basée sur le contenu visuel.
 
 ## Modules du projet
