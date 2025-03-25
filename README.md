@@ -1,4 +1,4 @@
-# Recherche d'image par similarité et indexation d'une base d'image
+# Projet L3E1 : Recherche d'image par similarité et indexation d'une base d'image
 Ce projet implémente un système de recherche d'images similaires basé sur l'extraction de caractéristiques et l'indexation efficace avec FAISS. Il est conçu pour des applications telles que la recherche d'images, la recommandation de contenu et l'analyse basée sur le contenu visuel.
 
 ## Modules du projet
@@ -20,7 +20,7 @@ projet/
 │   ├── image_preprocessing.py  # Module de prétraitement d'images
 │   ├── feature_extractor.py    # Module d'extraction de caractéristiques
 │   ├── similarity_search.py    # Module de recherche d'images similaires
-│   ├── frontend.py             # Interface web via Streamlit
+│   ├── frontend/               # Interface web via Streamlit
 │
 ├── test/                       # Tests unitaires pour les modules
 │   ├── image_preprocessing_test.py
@@ -35,16 +35,19 @@ projet/
 │   ├── tiny-imagenet-200                 # Dataset Tiny ImageNet, contenant 100k images
 │
 ├── projet.egg-info/            # Métadonnées générées après l'installation en mode éditable 
-│   ├── PKG-INFO                  # Contient les informations sur le package 
-│   ├── requires.txt              # Liste des dépendances du package 
-│   ├── top_level.txt             # Nom du package principal 
-│   ├── dependency_links.txt      # Liens vers les dépendances externes 
+│   ├── PKG-INFO                # Contient les informations sur le package 
+│   ├── requires.txt            # Liste des dépendances du package 
+│   ├── top_level.txt           # Nom du package principal 
+│   ├── dependency_links.txt    # Liens vers les dépendances externes 
 │
 ```
 
-## Prérequis
-Voir **requirements.txt**. \
-Concernant les ressources, le dossier est à télécharger depuis *[ce drive](https://drive.google.com/drive/folders/1dIx56IIORXPxI0vRue6CocAA-3QYxF0U?usp=sharing)* et à glisser dans le projet comme l'indique l'architecture.
+## Ressources
+L'ensemble de données utilisé est **Tiny ImageNet**. Sous-ensemble d’ImageNet, il est conçu pour des expériences en classification d’images avec un dataset réduit et contient 200 classes de 500 images (64×64). Disponible depuis *[ce lien](http://cs231n.stanford.edu/tiny-imagenet-200.zip)*.\
+**Source : [CS231N - Stanford](https://cs231n.stanford.edu/) - fourni pour un usage académique et non commercial.**
+
+Le dossier des ressources, en son intégralité (dataset, embeddings et catégories), est disponible au besoin depuis *[ce drive](https://drive.google.com/drive/folders/1dIx56IIORXPxI0vRue6CocAA-3QYxF0U?usp=sharing)*.
+
 ## Tests Unitaires
 Les tests unitaires se lancent via la commande (par exemple avec similarity_search_test.py) et depuis la racine du projet :
 ```
@@ -52,11 +55,11 @@ python3 -m unittest test/similarity_search_test.py
 ```
 
 ## Utilisation
-Le lancement de l'**application web** se fait depuis la racine du projet avec la commande :
+Le lancement de l'**application web** se fait avec la commande :
 ```
 streamlit run src/frontend.py
 ```
-Pour tester l'application **sans interface** et depuis la racine du projet :
+Pour tester l'application **sans interface** :
 ```
 python3 test/app_test.py
 ```
