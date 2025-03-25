@@ -48,12 +48,6 @@ L'ensemble de données utilisé est **Tiny ImageNet**. Sous-ensemble d’ImageNe
 
 Le dossier des ressources, en son intégralité (dataset, embeddings et catégories), est disponible au besoin depuis *[ce drive](https://drive.google.com/drive/folders/1dIx56IIORXPxI0vRue6CocAA-3QYxF0U?usp=sharing)*.
 
-## Tests Unitaires
-Les tests unitaires se lancent via la commande (par exemple avec similarity_search_test.py) et depuis la racine du projet :
-```
-python3 -m unittest test/similarity_search_test.py
-```
-
 ## Utilisation
 Le lancement de l'**application web** se fait avec la commande :
 ```
