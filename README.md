@@ -43,10 +43,21 @@ projet/
 ```
 
 ## Ressources
-L'ensemble de données utilisé est **Tiny ImageNet**. Sous-ensemble d’ImageNet, il est conçu pour des expériences en classification d’images avec un dataset réduit et contient 200 classes de 500 images (64×64). Disponible depuis *[ce lien](http://cs231n.stanford.edu/tiny-imagenet-200.zip)*.\
+### Tiny ImageNet
+L'ensemble de données utilisé est **Tiny ImageNet**. Sous-ensemble d’ImageNet, il est conçu pour des expériences en classification d’images avec un dataset réduit contenant 200 classes de 500 images (64×64).\
 **Source : [CS231N - Stanford](https://cs231n.stanford.edu/) - fourni pour un usage académique et non commercial.**
 
-Le dossier des ressources, en son intégralité (dataset, embeddings et catégories), est disponible au besoin depuis *[ce drive](https://drive.google.com/drive/folders/1dIx56IIORXPxI0vRue6CocAA-3QYxF0U?usp=sharing)*.
+> Le dossier des ressources, en son intégralité (dataset, embeddings et catégories), est disponible au besoin depuis *[ce drive](https://drive.google.com/drive/folders/1dIx56IIORXPxI0vRue6CocAA-3QYxF0U?usp=sharing)*.
+
+### MobileNetV3 
+Ce projet utilise **MobileNetV3**, un modèle de classification d'images développé par Google.  
+Le modèle et ses poids sont distribués sous licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).\
+**Source : [PyTorch MobileNetV3](https://pytorch.org/vision/stable/models/generated/torchvision.models.mobilenet_v3_small.html)**  
+
+### FAISS
+
+Ce projet utilise **Facebook AI Similarity Search** (FAISS) pour l'indexation et la recherche rapide de vecteurs d'images. Développé par Facebook AI Research, FAISS est distribué sous [licence MIT](https://github.com/facebookresearch/faiss/blob/main/LICENSE).\
+**Source : [FAISS.IA](https://faiss.ai/)**
 
 ## Utilisation
 Le lancement de l'**application web** se fait avec la commande :
@@ -55,5 +66,5 @@ streamlit run src/frontend.py
 ```
 Pour tester l'application **sans interface** :
 ```
-python3 test/app_test.py
+python3 test/app_test.py <chemin/vers/image.jpg>
 ```
