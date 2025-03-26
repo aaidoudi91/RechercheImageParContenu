@@ -4,7 +4,7 @@ from pathlib import Path
 
 def main():
     st.title("À propos")
-    image = Image.open(Path(__file__).parent.parent / "ressources" / "tiny-imagenet-200/train/n07873807/images/n07873807_377.JPEG")
+    image = Image.open(Path(__file__).parent.parent.parent / "ressources" / "tiny-imagenet-200/train/n07873807/images/n07873807_377.JPEG")
     st.write("Informations sur l'application et l'équipe de développement.")
     # Vérifier si la section "À propos" a déjà été chargée
     if "a_propos_loaded" not in st.session_state:
