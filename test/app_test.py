@@ -1,15 +1,18 @@
-""" Application de test des programmes image_preprocessing, feature_extractor et similarity_search.
-!!! : À exécuter depuis le dossier projet via 'python3 test/app_test.py'. """
+""" Application de test des programmes image_preprocessing, feature_extractor et similarity_search. """
 
 import logging
+import sys
+
 from src.image_preprocessing import preprocess_image
 from src.feature_extractor import FeatureExtractor
 from src.similarity_search import find_top5_categories, find_top5_similar_images, get_image_path
+from pathlib import Path
+
 
 def main(image_path: str):
-    """ Fonction principale qui traite une image, extrait ses caractéristiques,
-    et trouve les catégories et images similaires.
-    :param image_path: Chemin vers l'image à traiter """
+    """ Fonction principale qui traite une image, extrait ses caractéristiques, et trouve les catégories
+        et images similaires.
+        :param image_path: Chemin vers l'image à traiter """
 
     try:
         processed_image = preprocess_image(image_path, target_size=(224, 224), to_tensor=True) # Prétraitement
@@ -36,5 +39,15 @@ def main(image_path: str):
         logging.error(f"Erreur lors du traitement de l'image: {e}")
 
 if __name__ == "__main__":
-    input_image_path = "ressources/mountain1.png"  # À REMPLIR
+    if len(sys.argv) > 1:
+        input_image_path = sys.argv[1]  # Utilise l'argument en ligne de commande
+    else:
+        print("Utilisation : python3 test/app_test.py <chemin/vers/image.jpg>")
+        input_image_path = str(Path(__file__).parent.parent
+            / "ressources/tiny-imagenet-200/train/n01443537/images/n01443537_0.jpeg")  # Valeur par défaut
+
+    if not Path(input_image_path).exists():  # Vérification de l'existence du fichier
+        print(f"Erreur : Le fichier '{input_image_path}' n'existe pas.")
+        sys.exit(1)  # Quitte le script avec un code d'erreur
+
     main(input_image_path)
