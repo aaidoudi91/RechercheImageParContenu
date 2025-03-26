@@ -3,12 +3,13 @@
 import unittest, os, torch
 from PIL import Image
 from src.image_preprocessing import preprocess_image, is_allowed_extension, InvalidImageFormatError
+from pathlib import Path
 
 
 class TestPreprocessing(unittest.TestCase):
     def setUp(self):
         """ Configuration initiale avant chaque test. """
-        self.valid_image_path = "ressources/mountain1.png"  # Chemin d'une image valide à créer pour les tests
+        self.valid_image_path = str(Path(__file__).parent.parent / "ressources" / "mountain1.png")
         self.invalid_image_path = "invalid_image.txt"
         self.non_existent_path = "non_existent.jpg"
 
