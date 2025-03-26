@@ -141,14 +141,11 @@ def main():
             col1, col2, col3, col4, col5 = st.columns(5)
             for i, (index, distance) in enumerate(top5):
                 image_path = get_image_path(index)
-                print("---------------------- DEBUG 0 ----------------------")
                 if os.path.exists(image_path):
-                    print("---------------------- DEBUG 1 ----------------------")
-                    similar_image = Image.open(image_path).convert("RGB")
+                    similar_image = Image.open(image_path)
                     with [col1, col2, col3, col4, col5][i]:
                         st.image(similar_image, caption=f"Image {i+1}", use_container_width=True)
                 else:
-                    print("---------------------- DEBUG 3 ----------------------")
                     st.write(f"Image non trouvée : {image_path}")
         except Exception as e:
             st.error(f"Erreur lors du traitement de l'image : {e}")
