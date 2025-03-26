@@ -11,9 +11,9 @@ Cette application permet :
 
 import streamlit as st, tempfile, os, logging, numpy as np
 from PIL import Image
-from src.image_preprocessing import preprocess_image
-from src.feature_extractor import FeatureExtractor
-from src.similarity_search import find_top5_similar_images, get_image_path
+from image_preprocessing import preprocess_image
+from feature_extractor import FeatureExtractor
+from similarity_search import find_top5_similar_images, get_image_path
 
 st.set_page_config(page_title="L3E1 - CBIR Démo", layout="centered") # Configuration de Streamlit
 st.markdown(
