@@ -12,4 +12,3 @@ scikit-learn>=1
 faiss-cpu
 streamlit_option_menu
 -e .
-opencv-python
