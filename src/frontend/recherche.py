@@ -6,7 +6,6 @@ from PIL import Image
 from image_preprocessing import preprocess_image
 from feature_extractor import FeatureExtractor
 from similarity_search import find_top5_similar_images, get_image_path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
 
 def main():
     # Initialisation sécurisée
