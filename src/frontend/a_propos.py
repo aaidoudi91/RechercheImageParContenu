@@ -1,7 +1,10 @@
 import streamlit as st
+from PIL import Image
+from pathlib import Path
 
 def main():
     st.title("À propos")
+    img = Image.open(Path(__file__).parent.parent / "ressources/n01443537_0.JPEG")
     st.write("Informations sur l'application et l'équipe de développement.")
     # Vérifier si la section "À propos" a déjà été chargée
     if "a_propos_loaded" not in st.session_state:
