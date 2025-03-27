@@ -12,7 +12,7 @@ from pathlib import Path
 
 # Charger les embeddings et catégories Tiny ImageNet
 TINY_IMAGENET_PATH = Path(__file__).parent.parent / "ressources" / "tiny-imagenet-200"
-EMBEDDINGS_PATH =  np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_Embeddings.npy", allow_pickle=True).astype('float32')
+EMBEDDINGS_PATH =  np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_Embeddings.npy").astype('float32')
 CATEGORIES_PATH = np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_Categories.npy", allow_pickle=True)
 
 # ---- Étape 1 : Construire l'index FAISS ---- #
