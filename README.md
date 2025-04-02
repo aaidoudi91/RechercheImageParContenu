@@ -17,9 +17,8 @@ Ce projet implémente un système de recherche d'images similaires par le conten
 ```
 projet/
 │
-├── setup.py                    # Fichier pour l'installation en mode éditable, générant le dossier projet.egg-info
-├── requirements.txt            # Liste des dépendances
 ├── README.txt                  # Documentation du projet
+├── requirements.txt            # Liste des dépendances
 │
 ├── src/
 │   ├── __init__.py             # Marque le dossier comme un package Python
@@ -28,12 +27,6 @@ projet/
 │   ├── similarity_search.py    # Module de recherche d'images similaires
 │   ├── clip_similarity_search.py  # Module de recherche d'images similaires via le texte
 │   ├── frontend/               # Interface web via Streamlit
-│
-├── test/                       # Tests unitaires pour les modules
-│   ├── image_preprocessing_test.py
-│   ├── feature_extractor_test.py
-│   ├── similarity_search_test.py
-│   ├── app_test.py             # Test de l'ensemble des modules
 │
 ├── ressources/                 # Dossier des embeddings, categories et images de Tiny ImageNet
 │   ├── tiny-imagenet-200                 # Dataset Tiny ImageNet, contenant 100k images (non inclus - à télécharger)
@@ -44,11 +37,11 @@ projet/
 │   ├── Tiny_ImageNet_CLIP_Embeddings.npy       # Vecteurs de caractéristiques liées au images (pour le TBIR / non inclus - à télécharger)
 │   ├── tinyimagenet_clip_feature_extractor.py  # Exctracteur des vecteurs du dataset (pour le TBIR)
 │
-├── projet.egg-info/            # Métadonnées générées après l'installation en mode éditable 
-│   ├── PKG-INFO                # Contient les informations sur le package 
-│   ├── requires.txt            # Liste des dépendances du package 
-│   ├── top_level.txt           # Nom du package principal 
-│   ├── dependency_links.txt    # Liens vers les dépendances externes 
+├── test/                       # Dossier de tests unitaires pour les modules
+│   ├── image_preprocessing_test.py
+│   ├── feature_extractor_test.py
+│   ├── similarity_search_test.py
+│   ├── app_test.py             # Test de l'ensemble des modules
 │
 ```
 
