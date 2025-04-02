@@ -12,10 +12,10 @@ from pathlib import Path
 
 # Charger les embeddings et catégories Tiny ImageNet
 TINY_IMAGENET_PATH = Path(__file__).parent.parent / "ressources" / "tiny-imagenet-200"
-EMBEDDINGS_PATH =  np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_Embeddings.npy").astype('float32')
-CATEGORIES_PATH = np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_Categories.npy", allow_pickle=True)
+EMBEDDINGS_PATH =  np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_MobilNetV3_Embeddings.npy").astype('float32')
+CATEGORIES_PATH = np.load(Path(__file__).parent.parent / "ressources"/"Tiny_ImageNet_MobilNetV3_Categories.npy", allow_pickle=True)
 
-# ---- Étape 1 : Construire l'index FAISS ---- #
+# Construire l'index FAISS
 dimension = EMBEDDINGS_PATH.shape[1]  # Taille des vecteurs d'embeddings
 index = faiss.IndexFlatL2(dimension)  # Index basé sur la distance L2 (euclidienne)
 index.add(EMBEDDINGS_PATH)  # Ajouter les embeddings au moteur FAISS
@@ -48,10 +48,10 @@ def find_top5_categories(image_features: np.ndarray):
     return top_5_categories
 
 
-def find_top5_similar_images(image_features: np.ndarray):
-    """ Trouve les 5 images les plus similaires à partir d'un vecteur de caractéristiques avec FAISS.
+def find_top_similar_images(image_features: np.ndarray, k):
+    """ Trouve les k images les plus similaires à partir d'un vecteur de caractéristiques avec FAISS.
     :param image_features: Vecteur de caractéristiques de l'image
-    :return: Liste des indices des 5 images les plus similaires et leurs distances """
+    :return: Liste des indices des k images les plus similaires et leurs distances """
 
     #Vérifier la dimension de l'image avant la recherche FAISS
     print(f"Dimension réelle de l'image en entrée: {image_features.shape}")
@@ -65,10 +65,10 @@ def find_top5_similar_images(image_features: np.ndarray):
         print(f"Erreur : la dimension de l'image ({image_features.shape[1]}) ne correspond pas à la dimension FAISS ({index.d})")
 
     #Lancer la recherche FAISS
-    distances, indices = index.search(image_features, 5)
-    top_5_similar = [(idx, distances[0][i]) for i, idx in enumerate(indices[0])]
+    distances, indices = index.search(image_features, k)
+    top_k_similar = [(idx, distances[0][i]) for i, idx in enumerate(indices[0])]
 
-    return top_5_similar
+    return top_k_similar
 
 
 def get_image_path(index_image, base_path=TINY_IMAGENET_PATH):
@@ -85,4 +85,3 @@ def get_image_path(index_image, base_path=TINY_IMAGENET_PATH):
     image_path = os.path.join(base_path, "train", class_id, "images", image_name)
 
     return image_path
-
