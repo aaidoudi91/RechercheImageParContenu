@@ -1,53 +1,87 @@
-""" Application de test des programmes image_preprocessing, feature_extractor et similarity_search. """
+""" Ce script permet de tester deux modèles de recherche d'images similaires :
+1. MobileNet, qui extrait des caractéristiques à partir d'une image donnée et trouve les images les plus proches.
+2. CLIP, qui permet de rechercher des images à partir d'une requête textuelle en utilisant des embeddings pré-calculés.
+L'utilisateur peut choisir le modèle à utiliser via un argument en ligne de commande. """
 
 import logging
 import sys
+from PIL import Image
+from matplotlib import pyplot as plt
 
 from src.image_preprocessing import preprocess_image
 from src.feature_extractor import FeatureExtractor
-from src.similarity_search import find_top5_categories, find_top5_similar_images, get_image_path
-from pathlib import Path
+from src.similarity_search import find_top5_categories, find_top_similar_images, get_image_path
+from src.clip_similarity_search import find_similar_images
+
+def display_images(indices):
+    """ Affiche les images correspondant aux indices donnés sur deux rangées horizontales.
+        :param indices: Liste des indices des images à afficher. """
+
+    num_images = len(indices)
+    num_rows = 2  # Nombre de rangées
+    num_cols = (num_images + 1) // 2  # Calcul du nombre de colonnes (arrondi vers le haut)
+
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(15, 10))  # Création de la figure avec plusieurs images
+    axes = axes.flatten()  # Aplatit les axes pour un accès facile, même si certaines cases restent vides
+
+    for i, idx in enumerate(indices):
+        img_path = get_image_path(idx)  # Récupère le chemin de l'image
+        image = Image.open(img_path)  # Ouvre l'image
+        axes[i].imshow(image)  # Affiche l'image
+        axes[i].axis("off")  # Supprime les axes pour une meilleure lisibilité
+
+    # Désactiver les cases inutilisées si le nombre d'images est impair
+    for j in range(len(indices), len(axes)):
+        axes[j].axis("off")
+
+    plt.tight_layout()  # Ajuste automatiquement les espacements entre les sous-graphiques
+    plt.show()
 
 
-def main(image_path: str):
-    """ Fonction principale qui traite une image, extrait ses caractéristiques, et trouve les catégories
-        et images similaires.
-        :param image_path: Chemin vers l'image à traiter """
-
+def main(image_path=None, query_text=None, model_type="mobilenet"):
+    """ Fonction principale qui gère l'exécution du programme en fonction du modèle choisi.
+        Elle effectue le prétraitement, l'extraction de caractéristiques et la recherche des images similaires.
+        :param image_path & query_text: Chemin de l'image (pour MobileNet) ou texte de la requête (pour CLIP).
+        :param model_type: Type de modèle à utiliser ("mobilenet" ou "clip"). """
     try:
-        processed_image = preprocess_image(image_path, target_size=(224, 224), to_tensor=True) # Prétraitement
+        if model_type == "mobilenet":
+            if image_path is None:
+                raise ValueError("Un chemin d'image est requis pour MobileNet.")
+            processed_image = preprocess_image(image_path, target_size=(224, 224), to_tensor=True)
+            extractor = FeatureExtractor()
+            features = extractor.extract_features(processed_image, from_preprocessed=True)
+            print("Vecteur de caractéristiques:", features.shape)
+            top5_categories = find_top5_categories(features)
+            print("Top 5 catégories :", top5_categories)
+            top_images = find_top_similar_images(features, 10)
 
-        extractor = FeatureExtractor() # Extraction du vecteur de caractéristiques
-        features = extractor.extract_features(processed_image, from_preprocessed=True)
-        print("Vecteur de caractéristiques:")
-        print(features)
-        print("Dimension du vecteur:", features.shape)
+        elif model_type == "clip":
+            if query_text is None:
+                raise ValueError("Un texte de requête est requis pour CLIP.")
+            top_images = find_similar_images(query_text)
 
-        top5_categories = find_top5_categories(features) # Recherche des 5 catégories les plus similaires
-        print("Top 5 catégories les plus similaires :")
-        for category, distance in top5_categories:
-            print(f"Catégorie: {category}, Distance: {distance}")
+        else:
+            raise ValueError("Modèle inconnu. Choisissez 'mobilenet' ou 'clip'.")
 
-        # Recherche des 5 images les plus similaires
-        top5_images = find_top5_similar_images(features)
-        print("Top 5 images les plus similaires :")
-        for index, distance in top5_images:
-            print(f"Index: {index}, Distance: {distance}")
-            print(f"Chemin de l'image pour l'index {index}: {get_image_path(index)}")
+        print("Top images les plus similaires :", top_images)
+        display_images(top_images)
 
-    except Exception as e: # Gestion des erreurs : log l'erreur en cas de problème
-        logging.error(f"Erreur lors du traitement de l'image: {e}")
+    except Exception as e:
+        logging.error(f"Erreur : {e}")
+
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        input_image_path = sys.argv[1]  # Utilise l'argument en ligne de commande
+    if len(sys.argv) > 2:
+        mode = sys.argv[1].lower()
+        if mode == "mobilenet":
+            image_path = sys.argv[2]
+            main(image_path=image_path, model_type="mobilenet")
+        elif mode == "clip":
+            query_text = sys.argv[2]
+            main(query_text=query_text, model_type="clip")
+        else:
+            print("Usage : python test_script.py <mobilenet|clip> <image_path|query_text>")
     else:
-        print("Utilisation : python3 test/app_test.py <chemin/vers/image.jpg>")
-        input_image_path = str(Path(__file__).parent.parent
-            / "ressources/tiny-imagenet-200/train/n01443537/images/n01443537_0.jpeg")  # Valeur par défaut
-
-    if not Path(input_image_path).exists():  # Vérification de l'existence du fichier
-        print(f"Erreur : Le fichier '{input_image_path}' n'existe pas.")
-        sys.exit(1)  # Quitte le script avec un code d'erreur
-
-    main(input_image_path)
+        print("Usage : python test_script.py <mobilenet|clip> <image_path|query_text>")
+        print("Exemple avec la query 'this is a cat' :")
+        main(query_text='this is a cat', model_type="clip")
