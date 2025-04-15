@@ -4,6 +4,7 @@ import unittest, os, torch, numpy as np
 from PIL import Image
 from src.feature_extractor import FeatureExtractor
 
+
 class TestFeatureExtractor(unittest.TestCase):
     def setUp(self):
         """ Configuration initiale avant chaque test. """
