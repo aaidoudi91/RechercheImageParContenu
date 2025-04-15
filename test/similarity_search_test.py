@@ -2,8 +2,9 @@
 
 import unittest, numpy as np
 from unittest.mock import patch
-from src.similarity_search import find_top5_categories, get_image_path
+from src.similarity_search import ti_find_top5_categories, ti_get_image_path
 from pathlib import Path
+
 
 class TestSimilaritySearch(unittest.TestCase):
     @classmethod
@@ -39,7 +40,7 @@ class TestSimilaritySearch(unittest.TestCase):
         query_features = np.array([0.15, 0.25, 0.35], dtype='float32')
 
         # Appeler la fonction à tester
-        top5_categories = find_top5_categories(query_features)
+        top5_categories = ti_find_top5_categories(query_features)
 
         # Vérifier que la sortie contient exactement 5 éléments
         self.assertEqual(len(top5_categories), 5)
@@ -59,7 +60,7 @@ class TestSimilaritySearch(unittest.TestCase):
         """ Teste la fonction get_image_path avec des indices simulés et un chemin de base simulé. """
 
         test_index = 2  # Index arbitraire pour le test
-        image_path = get_image_path(test_index)  # Appeler la fonction à tester
+        image_path = ti_get_image_path(test_index)  # Appeler la fonction à tester
         base_path = Path(__file__).parent.parent / "ressources" / "tiny-imagenet-200"
         # Construire le chemin attendu
         expected_class_id = self.simulated_categories[test_index]
