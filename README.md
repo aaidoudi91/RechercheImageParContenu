@@ -1,9 +1,10 @@
 # PixMatcher : a project for content-based image retrieval and image database indexing
-This project implements a **Content-Based Image Retrieval (CBIR)** system, using descriptors extracted from pre-trained **Convolutional Neural Networks (CNN)** to efficiently index and compare images. Additionally, a **Text-Based Image Retrieval (TBIR)** feature has been implemented, allowing image searches based on text descriptions.\\
+This project implements a **Content-Based Image Retrieval (CBIR)** system, using descriptors extracted from pre-trained **Convolutional Neural Networks (CNN)** to efficiently index and compare images. Additionally, a **Text-Based Image Retrieval (TBIR)** feature has been implemented, allowing image searches based on text descriptions.\
 
-Basically, for CBIR, the system converts query images and database images into high-dimensional feature vectors using a CNN, [MobileNetV3](#mobilenetv3). These vectors capture visual patterns such as shapes, textures, and colors. The system then compares the image vectors using [FAISS](#faiss), a library designed for fast similarity search.\ 
+Basically, for CBIR, the system converts query images and database images into high-dimensional feature vectors using a CNN, [MobileNetV3](#mobilenetv3). These vectors capture visual patterns such as shapes, textures, and colors. The system then compares the image vectors using [FAISS](#faiss), a library designed for fast similarity search.
+
 For TBIR, a model called [CLIP](#clip---vit-b32) (Contrastive Language–Image Pretraining) is used to map images and text 
-into a shared vector space, enabling cross-modal search, retrieving relevant images from text queries.\
+into a shared vector space, enabling cross-modal search, retrieving relevant images from text queries.
 For both search methods, we use two datasets (at the user's discretion) : [Tiny ImageNet](#tiny-imagenet) and [Open Image](#open-images).
 
 
