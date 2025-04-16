@@ -12,7 +12,7 @@ For both search methods, we use two datasets (at the user's discretion) : [Tiny 
 - **Feature Extraction** : Via *feature_extractor.py*, uses MobileNetV3 and its large weights to extract feature vectors. Also, via *tinyimagenet_mobilenetv3_feature_extractor.py*, MobileNetV3 is also used to extract feature vectors from the dataset images.
 - **Similarity Search** : Via *similarity_search.py*, the search is done with FAISS to quickly search images and the cosine distance for similar categories.
 
-- **Feature Extraction for TBIR** : Via *tinyimagenet_clip_feature_extractor.py*, uses CLIP and its ViT-B/32 model to extract vectors from the dataset.
+- **Feature Extraction for TBIR** : Via *tinyimagenet_clip_feature_extractor.py*, uses CLIP and its ViT-B/32 model to extract vectors from the dataset. Also, via  *tinyimagenet_clip_feature_extractor.py*, CLIP is also used to extract feature vectors from the dataset images.
 - **Similarity Search for TBIR** : In *clip_similarity_search.py*, the module converts the text into a feature vector to compare it to those in the dataset.
 
 - **Front-end**: In */frontend*, use Streamlit for the interface.
