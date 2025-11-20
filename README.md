@@ -18,7 +18,7 @@ For both search methods, we use two datasets (at the user's discretion) : [Tiny 
 - **Front-end**: In */frontend*, use Streamlit for the interface.
 
 
-## Architecture du Projet
+## Project Architecture
 ```
 PixMatcher/
 │
@@ -74,7 +74,7 @@ PixMatcher/
 
 ### Tiny ImageNet
 One of the two image sets used is **Tiny ImageNet**. A subset of ImageNet, it is designed for image classification experiments with a small dataset containing 200 classes of 500 images.\
-**Source : [CS231N - Stanford](https://cs231n.stanford.edu/) - Téléchargeable depuis ce lien : [tiny-imagenet-200.zip](http://cs231n.stanford.edu/tiny-imagenet-200.zip).**
+**Source : [CS231N - Stanford](https://cs231n.stanford.edu/) - Downloadable from this link : [tiny-imagenet-200.zip](http://cs231n.stanford.edu/tiny-imagenet-200.zip).**
 
 ### Open Images
 The second set of images collected by Google. Compared to Tiny ImageNet, it offers greater visual diversity and significantly higher image quality.\
@@ -118,5 +118,3 @@ python3 test/app_test.py <mobilenet|clip> <image_path|query_text>
 - Mathieu Moustache
 
 **Supervised by**  Mr. Camille Kurtz, as part of the L3E1 project of the third year of the Computer Science degree at Paris Cité University.
-
-Feel free to contribute or raise issues!
